@@ -1,0 +1,137 @@
+video {
+  width: 100%;
+}
+
+.video-container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  align-items: center;
+  background: black;
+  position: relative;
+}
+
+.video-controls-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  font-size: .8rem;
+  color: white;
+}
+
+.timeline-container {
+  height: 5px;
+  margin-inline: 0.5rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.timeline {
+  background-color: rgba(100, 100, 100, 0.5);
+  height: 3px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.timeline-container:hover .timeline {
+  height: 100%;
+}
+
+.timeline-container:hover .thumb-scrubing {
+  display: block;
+}
+
+.timeline::before {
+  background-color: rgb(150, 150, 150);
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: calc(100% - var(--preview-position) * 100%);
+}
+
+.timeline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: calc(100% - var(--progress-position) * 100%);
+  background-color: red;
+}
+
+.thumb-indecator {
+  --scale: 0;
+  position: absolute;
+  transform: translateX(-50%) scale(--scale);
+  height: 200%;
+  top: -50%;
+  left: calc(var(--progress-position) * 100%);
+  background-color: red;
+  border-radius: 50%;
+  transition: transform 150ms ease-in-out;
+  aspect-ratio: 1 / 1;
+}
+
+.video-controls-container .controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-inline: .5rem
+}
+
+.video-controls-container .controls button {
+  border: none;
+  background: none;
+  color: white;
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
+}
+
+.title-block {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-container.fullscreen .open-fullscreen-icon {
+  display: none;
+}
+
+.video-container:not(.fullscreen) .close-fullscreen-icon {
+  display: none;
+}
+
+.video-controls-container .controls button [class*="-icon"]:hover {
+  transform: scale(1.1);
+}
+
+.video-container.paused .pause-icon {
+  display: none;
+}
+
+.video-container:not(.paused) .play-icon {
+  display: none;
+}
+
+.duration {
+  margin-inline: .5rem;
+}
+
+.thumb-scrubing {
+  width: 1px;
+  height: 100%;
+  background-color: white;
+  position: absolute;
+  display: none;
+  z-index: 100;
+  left: calc(var(--scrubing-position) * 100%);
+}
