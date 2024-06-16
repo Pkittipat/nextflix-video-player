@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./App.css";
 export default function App() {
   const [fullscreen, setFullscreen] = useState(false);
   const [paused, setPaused] = useState(true);
   const [duration, setDuration] = useState("00:00:00");
+  const previewImg = useRef<HTMLImageElement>(null);
+  const video = useRef<HTMLVideoElement>(null);
+  const [previewTime, setPreviewTime] = useState("00:00:00");
 
   function handlerFullscreen() {
     if (!document.fullscreenElement) {
@@ -54,7 +57,21 @@ export default function App() {
     const percent =
       Math.min(Math.max(0, e.clientX - rect.x), rect.width) / rect.width;
 
-    console.log(percent);
+    if (video.current?.duration) {
+      const previewImgNumber = Math.max(
+        1,
+        Math.floor(percent * video.current?.duration),
+      );
+      const previewImgSrc = `previews/preview${previewImgNumber}.png`;
+
+      console.log(previewImgSrc);
+      if (previewImg.current) {
+        previewImg.current.src = previewImgSrc;
+      }
+
+      setPreviewTime(formatDuration(percent * video.current.duration));
+    }
+
     document.documentElement.style.setProperty(
       "--scrubing-position",
       `${percent}`,
@@ -84,6 +101,10 @@ export default function App() {
               onMouseMove={handleMouseMove}
               onMouseDown={toggleScrubbing}
             >
+              <div className="preview-img-container">
+                <img className="preview-img" ref={previewImg} />
+                <div className="previewTime">{previewTime}</div>
+              </div>
               <div className="thumb-indecator"></div>
               <div className="thumb-scrubing"></div>
             </div>
@@ -187,6 +208,7 @@ export default function App() {
           onTimeUpdate={handleTimeline}
           onLoadedData={handleLoadTime}
           onEnded={handleEnded}
+          ref={video}
         ></video>
       </div>
     </>
