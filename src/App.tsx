@@ -103,7 +103,7 @@ export default function App() {
             >
               <div className="preview-img-container">
                 <img className="preview-img" ref={previewImg} />
-                <div className="previewTime">{previewTime}</div>
+                <div className="preview-time">{previewTime}</div>
               </div>
               <div className="thumb-indecator"></div>
               <div className="thumb-scrubing"></div>
