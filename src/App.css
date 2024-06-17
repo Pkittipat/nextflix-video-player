@@ -20,7 +20,11 @@ video {
   z-index: 100;
   font-size: 0.8rem;
   color: white;
-  display: none;
+  opacity: 0;
+}
+
+.video-container:hover .video-controls-container {
+  opacity: 1;
 }
 
 .video-controls-container::before {
@@ -114,10 +118,6 @@ video {
   flex-grow: 1;
   align-items: center;
   justify-content: center;
-}
-
-.video-container:hover .video-controls-container {
-  display: block;
 }
 
 .video-container.fullscreen .open-fullscreen-icon {
