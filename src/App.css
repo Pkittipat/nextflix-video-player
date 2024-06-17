@@ -18,8 +18,20 @@ video {
   left: 0;
   width: 100%;
   z-index: 100;
-  font-size: .8rem;
+  font-size: 0.8rem;
   color: white;
+  display: none;
+}
+
+.video-controls-container::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
+  aspect-ratio: 6/1;
+  z-index: -1;
+  pointer-events: none;
 }
 
 .timeline-container {
@@ -84,7 +96,7 @@ video {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-inline: .5rem
+  margin-inline: 0.5rem;
 }
 
 .video-controls-container .controls button {
@@ -94,7 +106,7 @@ video {
   width: 3rem;
   height: 3rem;
   cursor: pointer;
-  margin: 1.5rem .5rem;
+  margin: 1.5rem 0.5rem;
 }
 
 .title-block {
@@ -102,6 +114,10 @@ video {
   flex-grow: 1;
   align-items: center;
   justify-content: center;
+}
+
+.video-container:hover .video-controls-container {
+  display: block;
 }
 
 .video-container.fullscreen .open-fullscreen-icon {
@@ -113,7 +129,7 @@ video {
 }
 
 .video-controls-container .controls button [class*="-icon"]:hover {
-  transform: scale(1.1);
+  transform: scale(1.2);
 }
 
 .video-container.paused .pause-icon {
@@ -125,7 +141,7 @@ video {
 }
 
 .duration {
-  margin-inline: .5rem;
+  margin-inline: 0.5rem;
 }
 
 .thumb-scrubing {
